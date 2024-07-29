@@ -24,6 +24,7 @@ class pointController {
     }
 
     async getAll (req, res) {
+        console.log(req)
         try {
             const points = await PointService.getAll()
             return res.json({points})
