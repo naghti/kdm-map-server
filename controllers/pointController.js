@@ -6,8 +6,10 @@ const {static} = require("express");
 class pointController {
     async create (req, res) {
         try {
+            if (req.body.pass != process.env.ADMIN_PASS) return res.status(500).json("неправильный код")
+            console.log(req.body)
             let photos = req.files?.photos || []
-            console.log(req)
+
             if (!Array.isArray(photos)) photos = [photos]
             const filesName = photos.map(photo => uuid.v4() + ".jpg") || null
             for (let i = 0; i < photos.length; i++) {
@@ -24,7 +26,7 @@ class pointController {
     }
 
     async getAll (req, res) {
-        console.log(req)
+
         try {
             const points = await PointService.getAll()
             return res.json({points})
