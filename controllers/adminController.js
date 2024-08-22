@@ -3,9 +3,11 @@ const path = require("path")
 const uuid = require('uuid')
 const {static} = require("express");
 const AdminService = require("../service/AdminService");
+const logger = require("../logger");
 
 class adminController {
     async checkPass (req, res) {
+        logger(req)
         const obj = {
             pass: false
         }
@@ -15,12 +17,13 @@ class adminController {
 
             return res.json(obj)
         } catch (e) {
-            console.log(e)
+            logger([req, e], "error")
             return res.status(500).json(e)
         }
     }
 
     async deletePoint (req, res) {
+        logger(req)
         try {
             if (req.body.pass != process.env.ADMIN_PASS) return res.status(500).json("неправильный код")
             console.log(req.body.id)
@@ -28,7 +31,7 @@ class adminController {
             const response = AdminService.delete(req.body.id)
             return res.json({response})
         } catch (e) {
-            console.log(e)
+            logger([req, e], "error")
             return res.status(500).json(e)
         }
     }

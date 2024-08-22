@@ -1,13 +1,15 @@
 const PointService = require("../service/PointService");
 const path = require("path")
 const uuid = require('uuid')
+const logger = require("../logger")
+
 const {static} = require("express");
 
 class pointController {
     async create (req, res) {
+        logger(req)
         try {
             if (req.body.pass != process.env.ADMIN_PASS) return res.status(500).json("неправильный код")
-            console.log(req.body)
             let photos = req.files?.photos || []
 
             if (!Array.isArray(photos)) photos = [photos]
@@ -20,18 +22,19 @@ class pointController {
             return res.json({point})
 
         } catch (e) {
-            console.log(e)
+            logger([req, e], "error")
             return res.status(500).json(e)
         }
     }
 
     async getAll (req, res) {
-
+        logger(req)
         try {
             const points = await PointService.getAll()
             return res.json({points})
         } catch (e) {
-            console.log(e)
+            logger([req, e], "error")
+            return res.status(500).json(e)
         }
     }
 }
