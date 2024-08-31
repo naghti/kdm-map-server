@@ -8,8 +8,8 @@ const logger = require("../logger");
 class adminController {
     async checkPass (req, res) {
         res.header("Access-Control-Allow-Origin", "*");
+        logger(req.body)
 
-        logger(req)
         const obj = {
             pass: false
         }
@@ -26,7 +26,7 @@ class adminController {
 
     async deletePoint (req, res) {
         res.header("Access-Control-Allow-Origin", "*");
-        logger(req)
+        logger(req.body)
         try {
             if (req.body.pass != process.env.ADMIN_PASS) return res.status(500).json("неправильный код")
             console.log(req.body.id)

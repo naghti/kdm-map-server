@@ -8,7 +8,7 @@ const {static} = require("express");
 class pointController {
     async create (req, res) {
         res.header("Access-Control-Allow-Origin", "*");
-        logger(req)
+        logger(req.body)
         try {
             if (req.body.pass != process.env.ADMIN_PASS) return res.status(500).json("неправильный код")
             let photos = req.files?.photos || []
@@ -30,7 +30,7 @@ class pointController {
 
     async getAll (req, res) {
         res.header("Access-Control-Allow-Origin", "*");
-        logger(req)
+        logger(req.body)
         try {
             const points = await PointService.getAll()
             return res.json({points})
