@@ -32,7 +32,7 @@ class adminController {
             console.log(req.body.id)
 
             const response = AdminService.delete(req.body.id)
-            return res.json({response})
+            return res.json("all good")
         } catch (e) {
             logger([req, e], "error")
             return res.status(500).json(e)
