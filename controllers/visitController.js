@@ -12,7 +12,6 @@ class visitController {
         res.header("Access-Control-Allow-Origin", "*");
         logger(req.body)
         try {
-            console.log(1)
             const ip = requestIp.getClientIp(req);
             console.log(ip)
             const coouldown = 1 * 100 * 60 * 60 * 24 // сутки
@@ -30,9 +29,10 @@ class visitController {
                     }
                 }
 
-                const result = await visitorService.updateVisitor(ip, now)
-                return res.json(result)
             }
+            const result = await visitorService.updateVisitor(ip, now)
+            return res.json(result)
+
         } catch (e) {
             logger([req, e], "error")
             return res.status(500).json(e)
