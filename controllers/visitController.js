@@ -1,6 +1,8 @@
 const path = require("path")
 const uuid = require('uuid')
 const logger = require("../logger")
+const ipaddr = require('ipaddr.js');
+const requestIp = require('request-ip');
 
 const {static} = require("express");
 const visitorService = require("../service/VisitorService");
@@ -10,7 +12,9 @@ class visitController {
         res.header("Access-Control-Allow-Origin", "*");
         logger(req.body)
         try {
-            const ip = req.ip
+            console.log(1)
+            const ip = requestIp.getClientIp(req);
+            console.log(ip)
             const coouldown = 1 * 100 * 60 * 60 * 24 // сутки
             const now = Date.now()
 
