@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const Point = new mongoose.Schema({
+const PointSchema = new mongoose.Schema({
     name: {type: String, required: false},
     type: {type: String, required: false},
     coordinates: {type: Array, required: false},
@@ -10,4 +10,21 @@ const Point = new mongoose.Schema({
     photos: {type: Array}
 })
 
-module.exports = mongoose.model('Point', Point);
+const VisitorsSchema = new mongoose.Schema({
+    ip: {type: String, required: true},
+    visit: {type: String, require: true}
+})
+
+const VisitorsCountSchema = new mongoose.Schema({
+    amount: {type: Number, required: true, default: 0}
+})
+
+const Point = mongoose.model('Point', PointSchema);
+const Visitors = mongoose.model('Visitors', VisitorsSchema);
+const VisitorsCount = mongoose.model('VisitorsCount', VisitorsCountSchema);
+
+module.exports = {
+    Point,
+    Visitors,
+    VisitorsCount
+};

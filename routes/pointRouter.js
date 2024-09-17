@@ -1,9 +1,8 @@
 const Router = require('express')
 const router = new Router()
-const markController = require('../controllers/pointController')
+const pointController = require('../controllers/pointController')
 
-router.post('/', markController.create)
-router.get('/', markController.getAll)
+router.get('/', pointController.getAll)
 
 // router.get('/:id', markController.getOne)
 

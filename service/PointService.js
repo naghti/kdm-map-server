@@ -1,5 +1,5 @@
 const logger = require("../logger")
-const Point = require("../models/models")
+const {Point} = require("../models/models")
 
 class PointService {
     async create (info, photos) {
