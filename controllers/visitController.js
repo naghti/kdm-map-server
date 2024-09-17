@@ -3,7 +3,7 @@ const uuid = require('uuid')
 const logger = require("../logger")
 
 const {static} = require("express");
-const visitorService = require("../service/visitorService");
+const visitorService = require("../service/VisitorService");
 
 class visitController {
     async get (req, res) {
