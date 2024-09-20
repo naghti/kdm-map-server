@@ -26,6 +26,7 @@ class adminController {
 
     async deletePoint (req, res) {
         res.header("Access-Control-Allow-Origin", "*");
+        console.log(req.body.id)
         logger(req.body)
         try {
             if (req.body.pass != process.env.ADMIN_PASS) return res.status(500).json("неправильный код")
